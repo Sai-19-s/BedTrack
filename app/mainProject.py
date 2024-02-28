@@ -19,7 +19,6 @@ def login():
             session['loggedin'] = True
             session['owner_id'] = chk_owner['owner_id']
             session['owner_name'] = chk_owner['owner_name']
-            print(chk_owner['owner_id'])
             return render_template('overallfile.html', \
                                    owner_name=chk_owner['owner_name'].capitalize(), \
                                    owner_id = chk_owner['owner_id'])
@@ -27,7 +26,6 @@ def login():
             flash('Invalid Login Credentials', 'error')
             return render_template('zlogin.html', form=form)
     if 'loggedin' in session:
-        print(chk_owner['owner_id'])
         return render_template('overallfile.html', \
                                    owner_name=session['owner_name'].capitalize(), \
                                    owner_id = session['owner_id'])
@@ -42,7 +40,6 @@ def register():
         user_name = form.user_name.data
         email = form.email.data
         password = form.password.data
-        print(f"user_name = {user_name}, email = {email}, password = {password}")
         result = register_chk_user_email(user_name, email, password)
 
         if result == 'success':
