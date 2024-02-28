@@ -1,0 +1,123 @@
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+}
+.content-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.register-form{
+    padding: 20px;
+    border: 1px solid rgb(148, 163, 179);
+    border-radius: 5px;
+    background-color:whitesmoke;
+    width: 300px;
+
+    user-select: none;
+}
+.form-heading{
+    margin-top: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+    background: linear-gradient(to right, red, black);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* color: black; */
+    font-size: 40px;
+}
+.same-style:focus{
+    outline: 1px solid rgb(129, 124, 124);
+}
+.form-group{
+    margin-bottom: 8px;
+}
+.same-style{
+    border: 1px solid rgb(187, 183, 183);
+    background-color: white;
+    padding: 5px;
+    font-size: 15px;
+    width: 100%;
+}
+.submit-btn{
+    margin-top: 15px;
+}
+small{
+    margin-left: 5px;
+}
+
+.submit-btn{
+    color: red;
+}
+
+.submit-btn:hover{
+    background-color: red;
+    color: white;
+    border: none;
+}
+.forget-pwd{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.forget-pwd a{
+    font-size: 15px;
+    text-decoration-line: none;
+    font-weight: bold;
+}
+.forget-pwd a:hover{
+    text-decoration-line: underline;
+}
+
+.have-account{
+    font-size: 1em;
+    margin-top: 5px;
+    text-align: center;
+}
+.have-account a{
+    text-decoration-line: none;
+    font-weight: bold;
+}
+
+.have-account a:hover{
+    text-decoration-line: underline;
+}
+
+#flash .error{
+    background: rgba(254, 199, 199, 0.651);
+    margin-top: 50px;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-top: -20px;
+}
+#flash .error p{
+    list-style-type: none;
+    color: red;
+}
+
+#flash .error p .flash-cls{
+    float: right;
+    background: none;
+    border: none;
+}
+#flash .success{
+    background: rgba(188, 251, 228, 0.718);
+    margin-top: 50px;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-top: -20px;
+}
+#flash .success p{
+    list-style-type: none;
+    color: green;
+}
+#flash .success a{
+    text-decoration-line: none;
+    font-weight: bold;
+    color: rgb(1, 1, 146);
+}
+#flash a:hover{
+    text-decoration-line: underline;
+}

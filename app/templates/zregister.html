@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registeration</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/register.css')}}">
+</head>
+<body>
+    <div class="content-section">
+        <div class="sub-content">
+            <form class="register-form" method="POST" action="{{ url_for('register') }}">
+                {{ form.hidden_tag() }}
+                <h2 class="form-heading">BedTrack</h2>
+                <div id="flash">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            {% if category == 'success' %}
+                            <div class="{{ category }}">
+                                <p>{{ message }}<span>Go to <a href="{{ url_for('login') }}">login</a></span></p>
+                            </div>
+                            {% else %}
+                            <div class="{{ category }}">
+                                <p>{{ message }}<button class="flash-cls">x</button></p>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
+                <!-- {{ form.user_name.label }} -->
+                <div class="form-group">
+                    {% if form.user_name.errors %}
+                        {{ form.user_name(class="user_name same-style") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.user_name.errors %}
+                                <small style="color: red"> {{ error }} </small>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                       {{ form.user_name(class="user_name same-style") }}
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    {% if form.email.errors %}
+                        {{ form.email(class="email same-style") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <small style="color: red"> {{ error }} </small>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="email same-style") }} 
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    {% if form.password.errors %}
+                        {{ form.password(class="password same-style") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <small style="color: red"> {{ error }} </small>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="password same-style") }}
+                    {% endif %}
+                </div>
+            
+                <div class="form-group">
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="password same-style") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <small style="color: red"> {{ error }} </small>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                       {{ form.confirm_password(class="password same-style") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.submit(class='submit-btn same-style')}}
+                </div>
+            </form>
+            <div class="have-account">
+                Do you have an account?
+                <a href="{{ url_for('login')}}">Log In</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cls_flash = document.getElementsByClassName('flash-cls')
+        let flash = document.getElementById('flash')
+
+        cls_flash[0].addEventListener('click', () => flash.style.display = 'none')
+    </script>
+</body>
+</html>

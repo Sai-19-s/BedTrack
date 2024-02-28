@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoginForm</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css')}}">
+</head>
+<body>
+    <div class="content-section">
+        <div class="sub-content">
+        <form class="login-form" method="POST" action="{{ url_for('login') }}">
+            {{ form.hidden_tag() }}
+                <h2 class="form-heading">BedTrack</h2>
+                <div id="flash">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <ul>
+                            {% for category, message in messages %}
+                                <li class="{{ category }}">{{ message }}<button class="flash-cls">x</button></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% endwith %}
+                </div>
+                <div class="form-group">
+                    {% if form.email.errors %}
+                        {{ form.email(class="email have-error") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <small style="color:red" class="error">{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                    {% else %}
+                       {{ form.email(class="email") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {% if form.password.errors %}
+                        {{ form.password(class="password") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span style="color: red"> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                       {{ form.password(class="password") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.submit(class='submit-btn')}}
+                </div>
+                
+                <small class="forget-pwd">
+                    <a href="#">Forget Password?</a>
+                </small>
+        </form>
+        <div class="have-account">
+            Do have an account? 
+            <a href="{{ url_for('register') }}">Sign Up</a>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        let cls_flash = document.getElementsByClassName('flash-cls')
+        let flash = document.getElementById('flash')
+
+        cls_flash[0].addEventListener('click', () => flash.style.display = 'none')
+    </script>
+</body>
+</html>

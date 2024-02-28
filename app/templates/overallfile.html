@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overall</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbars.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+    body{
+        margin:0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Times New Roman", Times, serif;
+        background-color: ghostwhite;
+    }
+    #main-heading {
+        text-align: center;
+        margin-top: 0px;
+        font-size: 80px;
+        background: linear-gradient(to right, black, red, black, red);
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: black;
+        user-select: none;
+        margin-bottom: -10px;
+    }
+    .overall-container{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    </style>
+</head>
+<body>
+    <div class="overall-container">
+        <header>
+            <h1 id="main-heading">BedTrack</h1>
+        </header>
+        <nav id="mainNavbar">
+            <nav class="navbar">
+                <div class="owner-bg"><span class="owner-name">{{ owner_name }}</span></div>
+                <div class="navlist">
+                    <div class="home">Home</div>
+                    <ul class="floorlist">
+                        <li class="floor1" index="1">Floor-1</li>
+                        <li class="floor2" index="2">Floor-2</li>
+                        <li class="floor3" index="3">Floor-3</li>
+                        <li class="floor4" index="4">Floor-4</li>
+                    </ul>
+                </div>
+                <div class="logout"><a class="logout link" href="{{ url_for('logout') }}">Logout</a></div>
+            </nav>
+        
+            <!-- hided subnavbar -->
+            <nav class="subnavbar">
+                <ul class="roomlist" owner_id="{{ owner_id }}">
+                    <li class="room1 rooms" index="1">Room-1</li>
+                    <li class="room2 rooms" index="2">Room-2</li>
+                    <li class="room3 rooms" index="3">Room-3</li>
+                    <li class="room4 rooms" index="4">Room-4</li>
+                </ul>
+            </nav>
+        
+            <!-- Home data -->
+            <div class="homedata">
+                <div><u>Take your first step</u></div><br/>
+                <div class="home-content">-- Click on the "Floor" where you want to make a selection.</div>
+                <div class="home-content">-- Once the Floor is selected, click on the desired "Room".</div>
+                <div class="home-content">-- Locate and click on the "Add+" button to add tenant.</div>
+                <div class="home-content">-- A form will appear. Enter the required tenant details accurately into the form.</div>
+                <div class="home-content">-- After entering the details, click on the "Submit" button to save information.</div> <br/>
+                <div>Thank You!...</div>
+            </div>
+        </nav>
+
+        <main id="mainDetails">
+            <div class="container">
+                <table class="content-table" id="tenentDetails">
+                    <thead class="tab-head">
+                    <tr class="rows">
+                        <th class="thead hname">Name</th>
+                        <th class="thead hphone">Phone</th>
+                        <th class="thead hide hemail">Email</th>
+                        <th class="thead hide haddress">Address</th>
+                        <th class="thead hide hchkin">Check In</th>
+                        <th class="thead haction">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody class="tab-body">
+                    {% if True %}
+                        {% for i in range(0, 4) %}
+                            <tr id="{{ i }}" class="rows">
+                                <td class="tname add-btn tstyle">Add+</td>
+                                <td class="tphone tstyle">-</td>
+                                <td class="hide temail tstyle">-</td>
+                                <td class="hide taddress tstyle">-</td>
+                                <td class="hide tchkin tstyle">-</td>
+                                <td>
+                                    <button type="button" class="edit-btn"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button type="button" class="del-btn" del_index="{{ i }}"><i class="fa-solid fa-user-minus"></i></button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="tenent-form">
+                <div class="sub-tenent-form" id="myid">
+                <button type="button" class="cls-btn">x</button>
+                <form id="myForm" method="post">
+                    <div class="inputdiv">
+                        <label for="Name">Name:</label>
+                        <input type="text" id="Name" class="name" name="Name" placeholder="Enter your name" required>
+                        <small></small>
+                    </div>
+
+                    <div class="inputdiv">
+                        <label for="Phone">Phone:</label>
+                        <input type="tel" pattern="[0-9]{10}" title="Please enter a 10-digit phone number" minlength="10" maxlength="10" id="Phone" class="phone" name="Phone" placeholder="Enter your phone number" required>
+                        <small></small>
+                    </div>
+
+                    <div class="inputdiv">
+                        <label for="Email">Email:</label>
+                        <input type="email" id="Email" class="email" name="Email" placeholder="Enter your email" required>
+                        <small></small>
+                    </div>
+
+                    <div class="inputdiv">
+                        <label for="Address">Address:</label>
+                        <textarea id="Address" name="Address" placeholder="Address" required></textarea>
+                        <small></small>
+                    </div>
+
+                    <input type="submit" value="submit" class="form-btn">
+                </form>
+                </div>
+            </div>
+            <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+        </main>
+    </div>
+</body>
+</html>

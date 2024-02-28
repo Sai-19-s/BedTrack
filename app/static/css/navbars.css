@@ -1,0 +1,203 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar{
+    background: lightslategray;
+    font-family: Georgia, serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    max-height: 50px;
+}
+.navbar .navlist .floorlist{
+    list-style: none;
+    display: inline-block;
+}
+
+/* Owner-name styling */
+.navbar .owner-name{
+    font-size: 25px;
+    background: linear-gradient(to right, red, black);;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    user-select: none;
+    border: none;
+    padding: 11px 3px;
+}
+.owner-bg{
+    background: ghostwhite;
+    padding: 11px;
+}
+
+/* Home button styling */
+.navbar .navlist .home{
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    user-select: none;
+}
+
+/* Floors styling */
+li[class ^= "floor"]{
+    display: inline-block;
+    padding: 0px 10px;
+    font-size: 20px;
+    cursor:pointer;
+    border-right: 2px solid rgb(190, 190, 190);
+    user-select: none;
+    color: black;
+    position: relative;
+}
+li[class ^='floor']:first-child{
+    border-left: 2px solid rgb(190, 190, 190);
+}
+
+/* Logout styling */
+.navbar .logout{
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+    /* margin-right: 10px; */
+    user-select: none;
+    position: relative;
+    color: black;
+}
+
+.navlist .home::after, 
+li[class ^= "floor"]::after, 
+.navbar .logout::after{
+    position: absolute;
+    bottom: -5px;
+    left: 10px; 
+    content: "";
+    background: crimson;
+    height: 2px;
+    width: 0px;
+    border: none;
+    border-radius: 5px;
+
+    transition: 0.5s;
+}
+
+.navbar .navlist .home::after,
+.navbar .logout::after{
+    left: 0px;
+}
+
+li[class ^= "floor"]:hover::after{
+    width: 75%;
+}
+
+.navlist .home:hover::after, 
+.navbar .logout:hover::after{
+    width: 100%;
+}
+
+
+/* Responsive Web Design */
+@media only screen and (max-width: 750px){
+    .navbar{
+       max-height: 200px;
+       border:none;
+    }
+    .navbar .owner-name{
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        background-color:ghostwhite;
+        padding: 20px 0px;
+    }
+    .navbar .navlist{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .navbar .navlist .home{
+        display: block;
+        margin-right: 5px ;
+    }
+
+    .navbar .navlist .floorlist li[class ^= 'floor']{
+        display: block;
+        border: none;
+        margin-top: 15px;
+    }
+}
+
+
+/* ------------------------------------------------ */
+
+/* Sub navbar styling */
+.subnavbar .roomlist{
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background:rgb(211, 218, 225);
+    color: olive;
+    height: 50px;
+    /* border: 2px solid maroon; */
+    border-top: none;
+}
+.subnavbar .roomlist li{
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Important */
+ /* .roomlist li{
+    flex: 1;
+    background:rgb(211, 218, 225);
+    color: olivedrab;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.roomlist li:hover {
+    background: darkolivegreen;
+    color:white;
+} */
+
+.subnavbar .roomlist li:hover{
+    color: red;
+}
+
+.subnavbar {
+    display: none;
+}
+
+.visible{
+    display: block;
+}
+
+
+/* Home data styling */
+.homedata{
+    display: block;
+    border: 2px solid;
+    padding: 20px;
+    margin-top: 50px;
+    font-size: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    overflow:auto;
+}
+.home-content{
+    text-align: left;
+    line-height: 25px;
+}
+.homevisible{
+    display: none;
+}
