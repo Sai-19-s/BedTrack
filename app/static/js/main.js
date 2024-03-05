@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
                 if (responseData.data.length !== 0) {
                     tenentObj = responseData.data;
-                    console.log(tenentObj)
+                    // console.log(tenentObj)
                     addData(responseData.data);
                 } else {
                     tenentObj = 0;
