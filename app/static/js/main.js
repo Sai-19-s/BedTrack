@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let owner_id;
     owner_id = document.querySelector('.roomlist').getAttribute('owner_id');
 
+
     /* Script for navbar */
     let subnavbar = document.querySelector(".subnavbar");
     let homedata = document.querySelector('.homedata');
@@ -84,24 +85,36 @@ document.addEventListener('DOMContentLoaded', function () {
     let addTenant = document.querySelectorAll(".add-btn");
     let tenentform = document.getElementsByClassName("sub-tenent-form");
     let mainDetails = document.getElementById("mainDetails");
+    let tntForm = document.getElementById('myForm');
+
+    function removeError(){
+        setSuccess(uName);
+        setSuccess(uPhone);
+        setSuccess(uEmail);
+        setSuccess(uAddress);
+        tntForm.reset();
+    };
+
     let addMethod = null;
     addTenant.forEach(function (item) {
         item.addEventListener('click', entryTenant)
     });
     function entryTenant(e){
+        removeError();
         addMethod = 'POST';
         editMethod = null;
         addIdx = this.closest('tr').id;
         tenentform[0].style.display = 'block';
         mainDetails.style.justifyContent = 'space-around';
+        tntForm.firstElementChild.children[1].focus();
     };
 
     // Script for close form
     let closeform = document.getElementsByClassName('cls-btn');
     closeform[0].addEventListener('click', function () {
-        document.getElementById('myForm').reset();
         tenentform[0].style.display = 'none';
         mainDetails.style.justifyContent = 'center';
+        removeError();
     });
     
     /* Form validation */
@@ -173,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
         parentEle.lastElementChild.innerText = message;
     };
 
-    document.getElementById('myForm').addEventListener('submit', function (event) {
+    tntForm.addEventListener('submit', function (event) {
         let str;
         let setmethod;
         event.preventDefault();
@@ -233,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // console.log(responseData)
             // console.log(responseData.data)
             if (responseData.status === 'success') {
-                document.getElementById('myForm').reset();
+                tntForm.reset();
     
                 tenentform[0].style.display = 'none';
                 mainDetails.style.justifyContent = 'center';
