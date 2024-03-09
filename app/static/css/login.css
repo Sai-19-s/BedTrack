@@ -105,3 +105,16 @@
     background: none;
     border: none;
 }
+
+/* show password */
+#pwd{
+    position: relative;
+}
+.hidepwd, .showpwd{
+    position: absolute;
+    right: 5px;
+    top: 8px;
+    font-size: 12px;
+    background: none;
+    color: black;
+}

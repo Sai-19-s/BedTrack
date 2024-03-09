@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoginForm</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css')}}">
 </head>
 <body>
@@ -38,14 +39,14 @@
 
                 <div class="form-group">
                     {% if form.password.errors %}
-                        {{ form.password(class="password") }}
+                        <div id='pwd'>{{ form.password(class="password") }}<i class="fa-regular fa-eye-slash hidepwd" id="showHide"></i></div>
                         <div class="invalid-feedback">
                             {% for error in form.password.errors %}
                                 <span style="color: red"> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                       {{ form.password(class="password") }}
+                        <div id='pwd'>{{ form.password(class="password") }}<i class="fa-regular fa-eye-slash hidepwd" id="showHide"></i></div>
                     {% endif %}
                 </div>
 
@@ -65,10 +66,32 @@
     </div>
 
     <script>
+        /* Show and hide password */
+        let password = document.getElementById('pwd').firstChild;
+        let showHide = document.getElementById('showHide');
+        
+        showHide.onclick = function(){
+            if(password.type === 'password'){
+                showHide.classList.remove('fa-eye-slash', 'hidepwd')
+                showHide.classList.add('fa-eye', 'showpwd')
+                password.type = 'text';
+            }
+            else{
+                showHide.classList.remove('fa-eye', 'showpwd')
+                showHide.classList.add('fa-eye-slash', 'hidepwd')
+                password.type = 'password';
+            }
+        }
+        
+        document.querySelector('.submit-btn').addEventListener('submit',function(e){
+            e.preventDefault();
+        })
+        
         let cls_flash = document.getElementsByClassName('flash-cls')
         let flash = document.getElementById('flash')
-
-        cls_flash[0].addEventListener('click', () => flash.style.display = 'none')
+        if(cls_flash[0]){
+            cls_flash[0].addEventListener('click', () => flash.style.display = 'none')
+        }
     </script>
 </body>
 </html>

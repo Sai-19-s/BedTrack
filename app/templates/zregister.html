@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registeration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/register.css')}}">
 </head>
 <body>
@@ -58,27 +59,27 @@
                 
                 <div class="form-group">
                     {% if form.password.errors %}
-                        {{ form.password(class="password same-style") }}
+                        <div id='pwd'>{{ form.password(class="password same-style") }}<i class="fa-regular fa-eye-slash hidepwd" id="showHide"></i></div>
                         <div class="invalid-feedback">
                             {% for error in form.password.errors %}
                                 <small style="color: red"> {{ error }} </small>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.password(class="password same-style") }}
+                        <div id='pwd'>{{ form.password(class="password same-style") }}<i class="fa-regular fa-eye-slash hidepwd" id="showHide"></i></div>
                     {% endif %}
                 </div>
             
                 <div class="form-group">
                     {% if form.confirm_password.errors %}
-                        {{ form.confirm_password(class="password same-style") }}
+                        <div id='pwd'>{{ form.confirm_password(class="password same-style") }}<i class="fa-regular fa-eye-slash hideconf" id="showHideconf"></i></div>
                         <div class="invalid-feedback">
                             {% for error in form.confirm_password.errors %}
                                 <small style="color: red"> {{ error }} </small>
                             {% endfor %}
                         </div>
                     {% else %}
-                       {{ form.confirm_password(class="password same-style") }}
+                        <div id='confPwd'>{{ form.confirm_password(class="password same-style") }}<i class="fa-regular fa-eye-slash hideconf" id="showHideconf"></i></div>
                     {% endif %}
                 </div>
 
@@ -94,10 +95,45 @@
     </div>
 
     <script>
-        let cls_flash = document.getElementsByClassName('flash-cls')
-        let flash = document.getElementById('flash')
+        document.addEventListener('DOMContentLoaded', function(){
+            /* Show and hide password */
+            function PwdVisibility(input, button) {
+                if (input.type === 'password') {
+                    button.classList.remove('fa-eye-slash', 'hidepwd', 'hideconf');
+                    button.classList.add('fa-eye', 'showpwd', 'showconf');
+                    input.type = 'text';
+                } 
+                else {
+                    button.classList.remove('fa-eye', 'showpwd', 'showconf');
+                    button.classList.add('fa-eye-slash', 'hidepwd', 'hideconf');
+                    input.type = 'password';
+                }
+            }
 
-        cls_flash[0].addEventListener('click', () => flash.style.display = 'none')
+            let password = document.getElementById('pwd').firstChild;
+            let showHide = document.getElementById('showHide');
+
+            let confPwd = document.getElementById('confPwd').firstChild;
+            let showHideconf = document.getElementById('showHideconf');
+
+            showHide.onclick = function() {
+                PwdVisibility(password, showHide);
+            }
+
+            showHideconf.onclick = function() {
+                PwdVisibility(confPwd, showHideconf);
+            }
+
+            document.querySelector('.submit-btn').addEventListener('submit',function(e){
+                e.preventDefault();
+            })
+
+            let cls_flash = document.getElementsByClassName('flash-cls')
+            let flash = document.getElementById('flash')
+            if(cls_flash[0]){
+                cls_flash[0].addEventListener('click', () => flash.style.display = 'none')
+            }
+        });
     </script>
 </body>
 </html>

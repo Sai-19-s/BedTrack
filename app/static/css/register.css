@@ -121,3 +121,27 @@ small{
 #flash a:hover{
     text-decoration-line: underline;
 }
+
+/* show password */
+#pwd{
+    position: relative;
+}
+.hidepwd, .showpwd{
+    position: absolute;
+    right: 5px;
+    top: 8px;
+    font-size: 12px;
+    background: none;
+    color: black;
+}
+#confPwd{
+    position: relative;
+}
+.hideconf, .showconf{
+    position: absolute;
+    right: 5px;
+    top: 8px;
+    font-size: 12px;
+    background: none;
+    color: black;
+}
